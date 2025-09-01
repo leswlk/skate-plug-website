@@ -1,3 +1,4 @@
+# Skate Plug Website
 # Skate Plug - Skate Shop & Electronics Repair
 
 A modern, responsive e-commerce website for skate gear and electronics repair services.
