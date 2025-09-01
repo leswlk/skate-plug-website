@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Section management with browser history support
-function showSection(sectionName, filter = null) {
+function showSection(sectionName, filter = null, updateHistory = true) {
     // Hide all sections
     document.querySelectorAll('.section').forEach(section => {
         section.classList.add('hidden');
@@ -161,8 +161,11 @@ function showSection(sectionName, filter = null) {
     }
 
     // Update browser history for back button support
-    const url = filter ? `#${sectionName}-${filter}` : `#${sectionName}`;
-    history.pushState({ section: sectionName, filter: filter }, '', url);
+    if (updateHistory) {
+        const url = filter ? `#${sectionName}-${filter}` : `#${sectionName}`;
+        const state = { section: sectionName, filter: filter, timestamp: Date.now() };
+        history.pushState(state, '', url);
+    }
 
     // If navigating to shop with a filter, apply it
     if (sectionName === 'shop') {
@@ -188,9 +191,31 @@ function showSection(sectionName, filter = null) {
 
 // Handle browser back/forward buttons
 window.addEventListener('popstate', function(event) {
-    if (event.state) {
-        showSection(event.state.section, event.state.filter);
+    if (event.state && event.state.section) {
+        // Don't update history when going back/forward
+        showSection(event.state.section, event.state.filter, false);
+    } else {
+        // If no state, go to home
+        showSection('home', null, false);
     }
+});
+
+// Handle initial page load with hash
+document.addEventListener('DOMContentLoaded', function() {
+    updateCartDisplay();
+
+    // Check if there's a hash in the URL for direct links
+    if (window.location.hash) {
+        const hash = window.location.hash.substring(1);
+        const [section, filter] = hash.split('-');
+        if (section) {
+            showSection(section, filter, false);
+            return;
+        }
+    }
+
+    // Show home section by default
+    showSection('home', null, false);
 });
 
 // Dropdown functionality
