@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skate Plug - Skate Shop & Electronics Repair</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="#" class="logo" onclick="showSection('home')">Skate Plug</a>
+
+            <!-- Search Bar -->
+            <div class="search-container">
+                <form class="search-form" onsubmit="handleSearch(event)">
+                    <input type="text" id="searchInput" placeholder="Search skateboards, shoes, apparel..." class="search-input">
+                    <button type="submit" class="search-btn">🔍</button>
+                </form>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="#" onclick="showSection('home')">Home</a></li>
+                <li><a href="#" onclick="showSection('featured')">Featured</a></li>
+                <li><a href="#" onclick="showSection('shop')">Shop</a></li>
+                <li><a href="#" onclick="showSection('services')">Services</a></li>
+                <li><a href="#" onclick="showSection('about')">About</a></li>
+                <li><a href="#" onclick="showSection('contact')">Contact</a></li>
+                <li>
+                    <div class="cart-icon" onclick="toggleCart()">
+                        🛒
+                        <span class="cart-count" id="cartCount">0</span>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Home Section with Sidebar Layout -->
+    <section class="section home-layout" id="home">
+        <!-- Left Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-content">
+                <h3 class="sidebar-title">Shop Categories</h3>
+                <nav class="category-nav">
+                    <a href="#" onclick="showSection('shop', 'complete')" class="category-link">
+                        <span class="category-icon">🛹</span>
+                        <span>Complete Skateboards</span>
+                    </a>
+                    <a href="#" onclick="showSection('shop', 'decks')" class="category-link">
+                        <span class="category-icon">🏂</span>
+                        <span>Decks</span>
+                    </a>
+                    <a href="#" onclick="showSection('shop', 'trucks')" class="category-link">
+                        <span class="category-icon">⚙️</span>
+                        <span>Trucks</span>
+                    </a>
+                    <a href="#" onclick="showSection('shop', 'wheels')" class="category-link">
+                        <span class="category-icon">⭕</span>
+                        <span>Wheels</span>
+                    </a>
+                    <a href="#" onclick="showSection('shop', 'bearings')" class="category-link">
+                        <span class="category-icon">🔧</span>
+                        <span>Bearings</span>
+                    </a>
+                    <a href="#" onclick="showSection('shop', 'hardware')" class="category-link">
+                        <span class="category-icon">🔩</span>
+                        <span>Hardware</span>
+                    </a>
+                    <a href="#" onclick="showSection('shop', 'protection')" class="category-link">
+                        <span class="category-icon">🪖</span>
+                        <span>Protection</span>
+                    </a>
+                    <a href="#" onclick="showSection('shop', 'apparel')" class="category-link">
+                        <span class="category-icon">👕</span>
+                        <span>Apparel</span>
+                    </a>
+                </nav>
+
+                <!-- Quick Actions -->
+                <div class="sidebar-actions">
+                    <h4>Quick Actions</h4>
+                    <a href="#" onclick="showSection('services')" class="action-link">🔧 Electronics Repair</a>
+                    <a href="#" onclick="showSection('contact')" class="action-link">📞 Contact Us</a>
+                    <a href="#" onclick="showSection('about')" class="action-link">ℹ️ About Us</a>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Hero Banner -->
+            <div class="hero-banner">
+                <div class="hero-slide active">
+                    <div class="hero-slide-content">
+                        <h1>Skate Plug</h1>
+                        <p class="tagline">Come Skate A Bit While Getting Your Screen Fixed!</p>
+                        <p>Premium skate gear for riders and professional electronics repair for your digital life. Two passions, one shop.</p>
+                        <div class="cta-buttons">
+                            <button class="btn btn-primary" onclick="showSection('shop')">Shop Skate Gear</button>
+                            <button class="btn btn-secondary" onclick="showSection('contact')">Fix My Device</button>
+                        </div>
+                    </div>
+                    <div class="hero-slide-image">
+                        <img src="https://images.unsplash.com/photo-1547447134-cd3f5c716530?w=800&h=400&fit=crop&crop=center" alt="Skateboarding Action" loading="lazy">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Promotional Banners -->
+            <div class="promo-banners">
+                <div class="promo-banner">
+                    <div class="promo-content">
+                        <h3>🔥 Hot Deals</h3>
+                        <p>Up to 30% off on selected items</p>
+                        <button class="btn btn-primary" onclick="showSection('shop')">Shop Sale</button>
+                    </div>
+                    <div class="promo-image">
+                        <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=200&fit=crop&crop=center" alt="Sale Items" loading="lazy">
+                    </div>
+                </div>
+                <div class="promo-banner">
+                    <div class="promo-content">
+                        <h3>🛠️ Electronics Repair</h3>
+                        <p>Professional device repair services</p>
+                        <button class="btn btn-secondary" onclick="showSection('contact')">Get Quote</button>
+                    </div>
+                    <div class="promo-image">
+                        <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=400&h=200&fit=crop&crop=center" alt="Repair Services" loading="lazy">
+                    </div>
+                </div>
+            </div>
+
+            <!-- New Arrivals Carousel -->
+            <div class="new-arrivals">
+                <h2 class="section-title">New Arrivals</h2>
+                <div class="carousel-container">
+                    <button class="carousel-btn carousel-prev" onclick="moveCarousel('new-arrivals', -1)">&#10094;</button>
+                    <div class="carousel-track" id="new-arrivals-track">
+                        <div class="carousel-item">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <img src="https://images.unsplash.com/photo-1544568100-847a948585b9?w=300&h=200&fit=crop&crop=center" alt="New Truck Set" loading="lazy">
+                                    <div class="product-badge">New</div>
+                                </div>
+                                <div class="product-info">
+                                    <div class="product-category">Trucks</div>
+                                    <h3 class="product-name">Pro Truck Set</h3>
+                                    <div class="product-price">$45.99</div>
+                                    <div class="product-actions">
+                                        <button class="add-to-cart" onclick="addToCart(3)">Add to Cart</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=300&h=200&fit=crop&crop=center" alt="New Wheels" loading="lazy">
+                                    <div class="product-badge">New</div>
+                                </div>
+                                <div class="product-info">
+                                    <div class="product-category">Wheels</div>
+                                    <h3 class="product-name">Formula Four Wheels</h3>
+                                    <div class="product-price">$35.99</div>
+                                    <div class="product-actions">
+                                        <button class="add-to-cart" onclick="addToCart(4)">Add to Cart</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <img src="https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?w=300&h=200&fit=crop&crop=center" alt="New Helmet" loading="lazy">
+                                    <div class="product-badge">New</div>
+                                </div>
+                                <div class="product-info">
+                                    <div class="product-category">Protection</div>
+                                    <h3 class="product-name">Pro-Tec Helmet</h3>
+                                    <div class="product-price">$55.99</div>
+                                    <div class="product-actions">
+                                        <button class="add-to-cart" onclick="addToCart(7)">Add to Cart</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-btn carousel-next" onclick="moveCarousel('new-arrivals', 1)">&#10095;</button>
+                </div>
+            </div>
+
+            <!-- Brand Logos -->
+            <div class="brand-logos">
+                <h3>Trusted Brands</h3>
+                <div class="logos-grid">
+                    <div class="brand-logo">
+                        <span>Element</span>
+                    </div>
+                    <div class="brand-logo">
+                        <span>Baker</span>
+                    </div>
+                    <div class="brand-logo">
+                        <span>Independent</span>
+                    </div>
+                    <div class="brand-logo">
+                        <span>Spitfire</span>
+                    </div>
+                    <div class="brand-logo">
+                        <span>Bones</span>
+                    </div>
+                    <div class="brand-logo">
+                        <span>Vans</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Newsletter Signup -->
+            <div class="newsletter">
+                <div class="newsletter-content">
+                    <h3>Stay Updated</h3>
+                    <p>Get the latest skate news, exclusive deals, and new product releases.</p>
+                    <form class="newsletter-form" onsubmit="handleNewsletter(event)">
+                        <input type="email" placeholder="Enter your email" required>
+                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </section>
+
+    <!-- Featured Products Section -->
+    <section class="section featured" id="featured">
+        <div class="container">
+            <h2 class="section-title">Featured Gear</h2>
+            <p class="section-subtitle">Handpicked essentials for your skate setup</p>
+            <div class="featured-grid">
+                <div class="featured-item">
+                    <div class="featured-image">
+                        <img src="https://images.unsplash.com/photo-1547447134-cd3f5c716530?w=400&h=300&fit=crop&crop=center" alt="Complete Skateboard" loading="lazy">
+                        <div class="featured-badge">Best Seller</div>
+                    </div>
+                    <div class="featured-content">
+                        <h3>Complete Skateboards</h3>
+                        <p>Ready-to-ride complete setups for all skill levels</p>
+                        <button class="btn btn-primary" onclick="showSection('shop', 'complete')">Shop Completes</button>
+                    </div>
+                </div>
+                <div class="featured-item">
+                    <div class="featured-image">
+                        <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop&crop=center" alt="Skateboard Decks" loading="lazy">
+                        <div class="featured-badge">New</div>
+                    </div>
+                    <div class="featured-content">
+                        <h3>Premium Decks</h3>
+                        <p>High-quality decks from top skate brands</p>
+                        <button class="btn btn-primary" onclick="showSection('shop', 'decks')">Shop Decks</button>
+                    </div>
+                </div>
+                <div class="featured-item">
+                    <div class="featured-image">
+                        <img src="https://images.unsplash.com/photo-1544568100-847a948585b9?w=400&h=300&fit=crop&crop=center" alt="Skateboard Trucks" loading="lazy">
+                        <div class="featured-badge">Pro Pick</div>
+                    </div>
+                    <div class="featured-content">
+                        <h3>Trucks & Hardware</h3>
+                        <p>Durable trucks and mounting hardware</p>
+                        <button class="btn btn-primary" onclick="showSection('shop', 'trucks')">Shop Trucks</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="quick-links">
+                <h3>Shop by Category</h3>
+                <div class="links-grid">
+                    <a href="#" onclick="showSection('shop', 'wheels')" class="quick-link">
+                        <span class="link-icon">⭕</span>
+                        <span>Wheels</span>
+                    </a>
+                    <a href="#" onclick="showSection('shop', 'bearings')" class="quick-link">
+                        <span class="link-icon">🔧</span>
+                        <span>Bearings</span>
+                    </a>
+                    <a href="#" onclick="showSection('shop', 'protection')" class="quick-link">
+                        <span class="link-icon">🪖</span>
+                        <span>Protection</span>
+                    </a>
+                    <a href="#" onclick="showSection('shop', 'apparel')" class="quick-link">
+                        <span class="link-icon">👕</span>
+                        <span>Apparel</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="section services" id="services">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🛹</div>
+                    <h3>Skate Shop</h3>
+                    <p>Everything you need to push your limits on the streets. From complete setups to individual components.</p>
+                    <ul class="service-list">
+                        <li onclick="showSection('shop', 'complete')">Complete Skateboards</li>
+                        <li onclick="showSection('shop', 'decks')">Decks, Trucks & Wheels</li>
+                        <li onclick="showSection('shop', 'bearings')">Bearings & Hardware</li>
+                        <li onclick="showSection('shop', 'protection')">Protective Gear</li>
+                        <li onclick="showSection('shop', 'apparel')">Streetwear & Shoes</li>
+                        <li onclick="showSection('shop', 'custom')">Custom Builds</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">📱</div>
+                    <h3>Electronics Repair</h3>
+                    <p>Professional repair services for all your devices. Quick turnaround, quality parts, solid warranty.</p>
+                    <ul class="service-list">
+                        <li onclick="showSection('contact', 'phone-repairs')">Phone Screen Repairs</li>
+                        <li onclick="showSection('contact', 'gaming-consoles')">Gaming Console Fixes</li>
+                        <li onclick="showSection('contact', 'tablet-repairs')">Tablet Repairs</li>
+                        <li onclick="showSection('contact', 'laptop-services')">Laptop Services</li>
+                        <li onclick="showSection('contact', 'water-damage')">Water Damage Recovery</li>
+                        <li onclick="showSection('contact', 'data-recovery')">Data Recovery</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shop Section -->
+    <section class="section shop hidden" id="shop">
+        <div class="container">
+            <div class="page-header">
+                <h1 class="section-title">Skate Shop</h1>
+                <p class="page-subtitle">Premium gear for street legends</p>
+            </div>
+
+            <!-- Filters Section -->
+            <div class="filters-container">
+                <div class="filters-grid">
+                    <div class="filter-group">
+                        <label for="category">Category</label>
+                        <select id="category" onchange="filterProducts()">
+                            <option value="">All Categories</option>
+                            <option value="complete">Complete Boards</option>
+                            <option value="decks">Decks</option>
+                            <option value="trucks">Trucks</option>
+                            <option value="wheels">Wheels</option>
+                            <option value="bearings">Bearings</option>
+                            <option value="hardware">Hardware</option>
+                            <option value="protection">Protection</option>
+                            <option value="apparel">Apparel</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="brand">Brand</label>
+                        <select id="brand" onchange="filterProducts()">
+                            <option value="">All Brands</option>
+                            <option value="element">Element</option>
+                            <option value="baker">Baker</option>
+                            <option value="supreme">Supreme</option>
+                            <option value="independent">Independent</option>
+                            <option value="spitfire">Spitfire</option>
+                            <option value="bones">Bones</option>
+                            <option value="vans">Vans</option>
+                            <option value="thrasher">Thrasher</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="priceRange">Price Range</label>
+                        <select id="priceRange" onchange="filterProducts()">
+                            <option value="">All Prices</option>
+                            <option value="0-50">Under $50</option>
+                            <option value="50-100">$50 - $100</option>
+                            <option value="100-200">$100 - $200</option>
+                            <option value="200+">$200+</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <div class="filter-buttons">
+                            <button class="btn" onclick="filterProducts()">Apply Filters</button>
+                            <button class="btn" onclick="clearFilters()">Clear All</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="products-grid" id="productsGrid">
+                <!-- Products will be dynamically loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section about hidden" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Street Smart, Tech Savvy</h2>
+                    <p>Founded by riders who happen to be tech geeks, Skate Plug represents the perfect fusion of street culture and technical expertise. We started as a small skate shop but quickly realized our community needed reliable tech repair services too.</p>
+                    <p>Whether you're looking for that perfect setup to nail your next trick or need your phone fixed after a gnarly slam, we've got you covered with the same attention to detail and passion for quality.</p>
+                    <div class="stats">
+                        <div class="stat">
+                            <div class="stat-number">500+</div>
+                            <div class="stat-label">Devices Repaired</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">1000+</div>
+                            <div class="stat-label">Skaters Served</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">5</div>
+                            <div class="stat-label">Years Experience</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">98%</div>
+                            <div class="stat-label">Success Rate</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <h3 style="color: #000; font-size: 2rem; margin-bottom: 1rem;">Two Worlds, One Shop</h3>
+                    <p style="color: #000; font-size: 1.1rem;">Bringing together the creativity of skate culture with the precision of tech repair</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact hidden" id="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Visit Our Shop</h3>
+                    <p>📍 123 Street Plaza, Downtown<br>City, State 12345</p>
+                    <p>📞 (555) 123-PLUG</p>
+                    <p>✉️ info@skateplug.com</p>
+                    
+                    <h3>Store Hours</h3>
+                    <p>Monday - Saturday: 10am - 8pm<br>Sunday: 12pm - 6pm</p>
+                    
+                    <h3>Quick Repair Quote</h3>
+                    <p>Text us a photo of your device for an instant estimate!</p>
+                </div>
+
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="service-type">Service Needed</label>
+                            <select id="service-type" name="service-type">
+                                <option value="">Select Service</option>
+                                <option value="skate">Skate Gear</option>
+                                <option value="repair">Device Repair</option>
+                                <option value="both">Both</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" placeholder="Tell us what you need..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h2 class="cart-title">Your Cart</h2>
+            <button class="close-cart" onclick="toggleCart()">✕</button>
+        </div>
+        <div id="cartItems">
+            <div class="empty-cart">
+                <p>Your cart is empty</p>
+                <p>Add some sick gear to get started! 🛹</p>
+            </div>
+        </div>
+        <div class="cart-total" id="cartTotal" style="display: none;">
+            <div class="total-amount">Total: $<span id="totalAmount">0</span></div>
+            <button class="checkout-btn" onclick="checkout()">Checkout</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Skate Plug</h3>
+                    <p>Where street culture meets tech solutions. Your one-stop shop for skate gear and electronics repair.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="#" onclick="showSection('services')">Our Services</a>
+                    <a href="#" onclick="showSection('about')">About Us</a>
+                    <a href="#" onclick="showSection('contact')">Contact</a>
+                    <a href="#">Warranty Info</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Us</h3>
+                    <div class="social-links">
+                        <a href="#" title="Instagram">IG</a>
+                        <a href="#" title="TikTok">TT</a>
+                        <a href="#" title="YouTube">YT</a>
+                        <a href="#" title="Facebook">FB</a>
+                    </div>
+                </div>
+            </div>
+            <p style="color: #666; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #333;">
+                © 2025 Skate Plug. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
