@@ -43,34 +43,56 @@
             <div class="sidebar-content">
                 <h3 class="sidebar-title">Shop Categories</h3>
                 <nav class="category-nav">
-                    <a href="#" onclick="showSection('shop', 'complete')" class="category-link">
-                        <span class="category-icon">🛹</span>
-                        <span>Complete Skateboards</span>
-                    </a>
-                    <a href="#" onclick="showSection('shop', 'decks')" class="category-link">
-                        <span class="category-icon">🏂</span>
-                        <span>Decks</span>
-                    </a>
-                    <a href="#" onclick="showSection('shop', 'trucks')" class="category-link">
-                        <span class="category-icon">⚙️</span>
-                        <span>Trucks</span>
-                    </a>
-                    <a href="#" onclick="showSection('shop', 'wheels')" class="category-link">
-                        <span class="category-icon">⭕</span>
-                        <span>Wheels</span>
-                    </a>
-                    <a href="#" onclick="showSection('shop', 'bearings')" class="category-link">
-                        <span class="category-icon">🔧</span>
-                        <span>Bearings</span>
-                    </a>
-                    <a href="#" onclick="showSection('shop', 'hardware')" class="category-link">
-                        <span class="category-icon">🔩</span>
-                        <span>Hardware</span>
-                    </a>
+                    <!-- Skateboards Dropdown -->
+                    <div class="dropdown">
+                        <a href="#" class="category-link dropdown-toggle" onclick="toggleDropdown(event, 'skateboards')">
+                            <span class="category-icon">🛹</span>
+                            <span>Skateboards</span>
+                            <span class="dropdown-arrow">▼</span>
+                        </a>
+                        <div class="dropdown-menu" id="skateboards-menu">
+                            <a href="#" onclick="showSection('shop', 'complete')" class="dropdown-item">Complete Skateboards</a>
+                            <a href="#" onclick="showSection('shop', 'decks')" class="dropdown-item">Decks</a>
+                            <a href="#" onclick="showSection('shop', 'build')" class="dropdown-item">Build Your Own</a>
+                            <a href="#" onclick="showSection('shop', 'clearance')" class="dropdown-item">Clearance Decks</a>
+                        </div>
+                    </div>
+
+                    <!-- Trucks & Hardware -->
+                    <div class="dropdown">
+                        <a href="#" class="category-link dropdown-toggle" onclick="toggleDropdown(event, 'hardware')">
+                            <span class="category-icon">⚙️</span>
+                            <span>Trucks & Hardware</span>
+                            <span class="dropdown-arrow">▼</span>
+                        </a>
+                        <div class="dropdown-menu" id="hardware-menu">
+                            <a href="#" onclick="showSection('shop', 'trucks')" class="dropdown-item">Trucks</a>
+                            <a href="#" onclick="showSection('shop', 'hardware')" class="dropdown-item">Hardware</a>
+                            <a href="#" onclick="showSection('shop', 'griptape')" class="dropdown-item">Griptape</a>
+                            <a href="#" onclick="showSection('shop', 'parts')" class="dropdown-item">Parts</a>
+                        </div>
+                    </div>
+
+                    <!-- Wheels & Bearings -->
+                    <div class="dropdown">
+                        <a href="#" class="category-link dropdown-toggle" onclick="toggleDropdown(event, 'wheels')">
+                            <span class="category-icon">⭕</span>
+                            <span>Wheels & Bearings</span>
+                            <span class="dropdown-arrow">▼</span>
+                        </a>
+                        <div class="dropdown-menu" id="wheels-menu">
+                            <a href="#" onclick="showSection('shop', 'wheels')" class="dropdown-item">Wheels</a>
+                            <a href="#" onclick="showSection('shop', 'bearings')" class="dropdown-item">Bearings</a>
+                        </div>
+                    </div>
+
+                    <!-- Protection -->
                     <a href="#" onclick="showSection('shop', 'protection')" class="category-link">
                         <span class="category-icon">🪖</span>
-                        <span>Protection</span>
+                        <span>Protective Gear</span>
                     </a>
+
+                    <!-- Apparel -->
                     <a href="#" onclick="showSection('shop', 'apparel')" class="category-link">
                         <span class="category-icon">👕</span>
                         <span>Apparel</span>

@@ -129,14 +129,25 @@ const products = [
 let cart = [];
 let filteredProducts = [...products];
 
-// Initialize page
+// Initialize page with hash navigation support
 document.addEventListener('DOMContentLoaded', function() {
     updateCartDisplay();
+
+    // Check if there's a hash in the URL (for direct links or back button)
+    if (window.location.hash) {
+        const hash = window.location.hash.substring(1);
+        const [section, filter] = hash.split('-');
+        if (section) {
+            showSection(section, filter);
+            return; // Don't show home if we have a hash
+        }
+    }
+
     // Show home section by default
     showSection('home');
 });
 
-// Section management
+// Section management with browser history support
 function showSection(sectionName, filter = null) {
     // Hide all sections
     document.querySelectorAll('.section').forEach(section => {
@@ -148,6 +159,10 @@ function showSection(sectionName, filter = null) {
     if (targetSection) {
         targetSection.classList.remove('hidden');
     }
+
+    // Update browser history for back button support
+    const url = filter ? `#${sectionName}-${filter}` : `#${sectionName}`;
+    history.pushState({ section: sectionName, filter: filter }, '', url);
 
     // If navigating to shop with a filter, apply it
     if (sectionName === 'shop') {
@@ -170,6 +185,52 @@ function showSection(sectionName, filter = null) {
     // Scroll to top when changing sections
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
+// Handle browser back/forward buttons
+window.addEventListener('popstate', function(event) {
+    if (event.state) {
+        showSection(event.state.section, event.state.filter);
+    }
+});
+
+// Dropdown functionality
+function toggleDropdown(event, menuId) {
+    event.preventDefault();
+
+    // Close all other dropdowns
+    document.querySelectorAll('.dropdown-menu').forEach(menu => {
+        if (menu.id !== menuId + '-menu') {
+            menu.classList.remove('show');
+        }
+    });
+
+    document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
+        if (toggle !== event.currentTarget) {
+            toggle.classList.remove('active');
+        }
+    });
+
+    // Toggle current dropdown
+    const menu = document.getElementById(menuId + '-menu');
+    const toggle = event.currentTarget;
+
+    if (menu) {
+        menu.classList.toggle('show');
+        toggle.classList.toggle('active');
+    }
+}
+
+// Close dropdowns when clicking outside
+document.addEventListener('click', function(event) {
+    if (!event.target.closest('.dropdown')) {
+        document.querySelectorAll('.dropdown-menu').forEach(menu => {
+            menu.classList.remove('show');
+        });
+        document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
+            toggle.classList.remove('active');
+        });
+    }
+});
 
 // Display products
 function displayProducts(productsToShow) {
